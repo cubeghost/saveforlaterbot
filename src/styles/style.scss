@@ -14,3 +14,13 @@ body {
     padding: 0;
   }
 }
+
+.appRoot > .content {
+  display: flex;
+  flex-direction: row;
+}
+
+.directMessages {
+  flex: 1 1 70%;
+  max-width: 70%;
+}

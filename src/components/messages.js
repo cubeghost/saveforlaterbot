@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { actionTypes, actionCreators } from './actions';
-import Header from 'src/header';
-import Tweet from 'src/tweet';
+import Tweet from 'components/tweet';
 
-import escapeStringRegexp from 'escape-string-regexp';
+import { actionTypes } from 'src/actions';
+
+// import escapeStringRegexp from 'escape-string-regexp';
 
 
 const tweetUrlRegex = new RegExp('^https:\/\/twitter\.com\/[^\/]+\/status\/([0-9]+)', 'i');
@@ -16,18 +16,15 @@ class Messages extends Component {
 
   componentWillMount() {
     if (typeof window !== 'undefined' && this.props.messages.length === 0) {
-      this.props.dispatch(actionCreators.fetchMessages());
+      this.props.dispatch(this.props.route.preload.actionCreator());
     }
   }
 
   renderMessage(message) {
-    if (typeof window !== 'undefined') {
-      // console.log(message)
-    }
     var tweets = [];
     var urls = [];
     var text = message.text;
-    if (message.entities.urls.length > 0) {
+    if (message.entities && message.entities.urls.length > 0) {
       message.entities.urls.forEach(function(url) {
         var expanded = url.expanded_url;
         if (!!expanded && tweetUrlRegex.test(expanded)) {
@@ -64,9 +61,7 @@ class Messages extends Component {
   }
 
   render() {
-    return (<div>
-      <Header />
-
+    return (<div className="directMessages">
       {this.props.messages.map(this.renderMessage)}
     </div>);
   }
@@ -76,7 +71,7 @@ class Messages extends Component {
 var mapStateToProps = function(store) {
   return {
     messages: store.directMessages
-  }
+  };
 };
 
 Messages.preload = {

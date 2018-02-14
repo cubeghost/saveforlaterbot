@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, browserHistory } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import configureStore from './store';
+import configureStore from 'src/store';
 
-import routes from './routes';
+import App from 'components/app';
 
 import './styles/style.scss';
 
@@ -16,13 +16,12 @@ if (window.__REDUX_STATE__) {
 
 var store = configureStore(initialState);
 
-
 var router = (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      {routes}
-    </Router>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 );
 
-ReactDOM.render(router, document.getElementById('react-root'));
+ReactDOM.hydrate(router, document.getElementById('react-root'));

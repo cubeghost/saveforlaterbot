@@ -11,14 +11,14 @@ var twitterClient = function(accessToken, accessSecret) {
     access_token_key: accessToken,
     access_token_secret: accessSecret
   });
-}
+};
 
 var getUser = function(accessToken, accessSecret) {
   return new Promise(function(resolve, reject) {
     var client = twitterClient(accessToken, accessSecret);
     client.get('/account/verify_credentials', {}).then(resolve).catch(reject);
   });
-}
+};
 
 var getDirectMessages = function(userToken, userSecret) {
   return new Promise(function(resolve, reject) {
@@ -37,20 +37,21 @@ var getDirectMessages = function(userToken, userSecret) {
       }).catch(reject);
     }).catch(reject);
   });
-}
+};
 
 export const twitterApi = {
-  getDirectMessages: getDirectMessages
+  getDirectMessages: getDirectMessages,
+  getUser: getUser,
 };
 
 
 
 export const twitterRouter = express.Router();
 
-var handleError = function(res, error) {
-  console.log(error);
-  res.status(500).send(error);
-}
+// var handleError = function(res, error) {
+//   console.log(error);
+//   res.status(500).send(error);
+// };
 
 twitterRouter.use(bodyParser.json());
 

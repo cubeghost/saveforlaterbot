@@ -43,6 +43,7 @@ var errors = function(state, action) {
 };
 
 export default combineReducers({
+  user,
   directMessages,
   errors
 });

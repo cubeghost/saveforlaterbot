@@ -1,15 +1,32 @@
-import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import Connect from 'components/connect';
+import Messages from 'components/messages';
+import User from 'components/user';
 
-import App from './app';
-import Connect from './connect';
-import Messages from './messages';
+import { actionTypes, actionCreators } from 'src/actions';
 
-const routes = (
-  <Route path="/" component={App}>
-    <IndexRoute component={Connect} />
-    <Route path="/messages" component={Messages} />
-  </Route>
-);
+const routes = [
+  { path: '/',
+    exact: true,
+    component: Connect,
+  },
+  {
+    path: '/messages',
+    component: Messages,
+    preload: {
+      actionType: actionTypes.FETCH_MESSAGES,
+      actionCreator: actionCreators.fetchMessages,
+      functionName: 'getDirectMessages'
+    }
+  },
+  {
+    path: '/messages',
+    component: User,
+    preload: {
+      actionType: actionTypes.FETCH_USER,
+      actionCreator: actionCreators.fetchUser,
+      functionName: 'getUser'
+    }
+  },
+];
 
 export default routes;

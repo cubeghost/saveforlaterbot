@@ -1,13 +1,4 @@
-// Inspired by https://github.com/airbnb/javascript but less opinionated.
-
-// We use eslint-loader so even warnings are very visibile.
-// This is why we only use "WARNING" level for potential errors,
-// and we don't use "ERROR" level at all.
-
-// In the future, we might create a separate list of rules for production.
-// It would probably be more strict.
-
-export default {
+module.exports = {
   root: true,
   parser: 'babel-eslint',
   plugins: ['jsx-a11y', 'react'],
@@ -30,6 +21,7 @@ export default {
   },
 
   settings: {
+    'import/ignore': ['node_modules', '\\.(json|css|jpg|png|gif|eot|svg|ttf|woff|woff2|mp4|webm)$'],
     'import/extensions': ['.js'],
     'import/resolver': {
       node: {
@@ -46,7 +38,7 @@ export default {
     eqeqeq: ['warn', 'allow-null'],
     'guard-for-in': 'warn',
     indent: 'off',
-    'new-cap': ['warn', { newIsCap: true }],
+    'new-cap': ['warn', { capIsNew: false }],
     'new-parens': 'warn',
     'no-array-constructor': 'warn',
     'no-caller': 'warn',
@@ -164,7 +156,7 @@ export default {
 
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
     'jsx-a11y/aria-role': 'warn',
-    'jsx-a11y/img-has-alt': 'warn',
+    // 'jsx-a11y/img-has-alt': 'warn',
     'jsx-a11y/img-redundant-alt': 'warn',
     'jsx-a11y/no-access-key': 'warn',
   },
