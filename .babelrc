@@ -2,9 +2,11 @@
   "presets": ["react", "env"],
   "plugins": [
     "transform-object-rest-spread",
+    "transform-runtime",
     ["module-resolver", {
       "alias": {
         "src": "./src",
+        "server": "./src/server",
         "components": "./src/components"
       }
     }]

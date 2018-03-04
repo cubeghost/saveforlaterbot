@@ -4,7 +4,8 @@ body {
 
 .directMessage {
   display: table;
-  border: 2px solid #1da1f2;
+  // border: 2px solid #1da1f2;
+  border: 1px solid #e1e8ed;
   padding: 8px 14px;
   margin: 4px 0;
   border-radius: 6px;
@@ -12,6 +13,10 @@ body {
   &--tweet {
     border: 0;
     padding: 0;
+  }
+
+  &--link {
+    display: block;
   }
 }
 
@@ -23,4 +28,17 @@ body {
 .directMessages {
   flex: 1 1 70%;
   max-width: 70%;
+  padding: 1em;
+}
+
+.opengraphPreview {
+  img {
+    max-width: 100%;
+  }
+
+  &-description {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }

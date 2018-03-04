@@ -5,9 +5,9 @@ import session from 'express-session';
 const RedisStore = require('connect-redis')(session);
 import Grant from 'grant-express';
 
-import redis from './redis';
-import router from './router';
-import { twitterRouter } from './twitter';
+import redis from 'server/redis';
+import router from 'server/router';
+import twitterRouter from 'server/twitter/router';
 
 
 var app = express();

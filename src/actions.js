@@ -1,9 +1,5 @@
 import fetch from 'isomorphic-fetch';
 
-
-//const hostname = `https://${process.env.PROJECT_NAME}.glitch.me`;
-
-
 export const actionTypes = {
   FETCH_MESSAGES: 'FETCH_MESSAGES',
   FETCH_USER: 'FETCH_USER'
@@ -11,17 +7,17 @@ export const actionTypes = {
 
 
 export const actionCreators = {
-  fetchMessages: function() {
+  fetchMessages: function(options = { invalidate: false }) {
     return {
       type: actionTypes.FETCH_MESSAGES,
-      payload: generatePayload('GET', '/twitter/messages')
-    }
+      payload: generatePayload('GET', `/twitter/messages?invalidate=${options.invalidate}`)
+    };
   },
   fetchUser: function() {
     return {
       type: actionTypes.FETCH_USER,
       payload: generatePayload('GET', '/twitter/user')
-    }
+    };
   },
 };
 
@@ -37,8 +33,5 @@ function generatePayload(method, url) {
       });
     }
     return response.json();
-  }).catch(function(err) {
-    console.log(err)
-    return err
   });
 };

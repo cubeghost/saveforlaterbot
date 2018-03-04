@@ -7,7 +7,7 @@ import serialize from 'serialize-javascript';
 import { Provider } from 'react-redux';
 import configureStore from 'src/store';
 
-import { twitterApi } from './twitter';
+import TwitterCache from 'server/twitter/cache';
 
 import App from 'components/app';
 
@@ -36,11 +36,12 @@ var router = (req, res, next) => {
       if (!req.session || !req.session.grant) {
         resolve();
       }
-      var { access_token, access_secret } = req.session.grant.response;
+
+      var cache = new TwitterCache(req);
       Promise.all(preloadRequests.map(preload => {
         return store.dispatch({
           type: preload.actionType,
-          payload: twitterApi[preload.functionName].bind(null, access_token, access_secret)(preload.args)
+          payload: cache[preload.functionName](preload.args)
         });
       })).then(resolve).catch(reject);
     } else {

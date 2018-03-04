@@ -15,7 +15,7 @@ const routes = [
     preload: {
       actionType: actionTypes.FETCH_MESSAGES,
       actionCreator: actionCreators.fetchMessages,
-      functionName: 'getDirectMessages'
+      functionName: 'directMessages'
     }
   },
   {
@@ -24,7 +24,7 @@ const routes = [
     preload: {
       actionType: actionTypes.FETCH_USER,
       actionCreator: actionCreators.fetchUser,
-      functionName: 'getUser'
+      functionName: 'user'
     }
   },
 ];

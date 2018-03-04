@@ -14,7 +14,7 @@ class Tweet extends Component {
   }
 
   componentDidMount() {
-    const { isScriptLoaded, isScriptLoadSucceed } = this.props
+    const { isScriptLoaded, isScriptLoadSucceed } = this.props;
     if (isScriptLoaded && isScriptLoadSucceed) {
       this.embed();
     }
@@ -28,7 +28,8 @@ class Tweet extends Component {
 
     window.twttr.widgets.createTweet(
       this.props.id,
-      this.refs.embedContainer
+      this.refs.embedContainer,
+      { dnt: true }
     );
   }
 

@@ -3,14 +3,9 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import Tweet from 'components/tweet';
+import Link from 'components/link';
 
 import { actionTypes } from 'src/actions';
-
-// import escapeStringRegexp from 'escape-string-regexp';
-
-
-const tweetUrlRegex = new RegExp('^https:\/\/twitter\.com\/[^\/]+\/status\/([0-9]+)', 'i');
-const prettifyUrl = new RegExp('(^https?:\/\/)', 'i');
 
 class Messages extends Component {
 
@@ -21,39 +16,27 @@ class Messages extends Component {
   }
 
   renderMessage(message) {
-    var tweets = [];
-    var urls = [];
-    var text = message.text;
-    if (message.entities && message.entities.urls.length > 0) {
-      message.entities.urls.forEach(function(url) {
-        var expanded = url.expanded_url;
-        if (!!expanded && tweetUrlRegex.test(expanded)) {
-          const tweetId = tweetUrlRegex.exec(expanded)[1];
-          tweets.push({
-            id: tweetId,
-          });
-          text = text.replace(url.url, '');
-        } else if (!!expanded) {
-          // TODO eventually scrape og:meta tags for this stuff and cache on server
-          urls.push({
-            expanded: expanded,
-            display: expanded.replace(prettifyUrl, '')
-          });
-          text = text.replace(url.url, '');
-        }
-      });
-    }
+    const { text, tweets, links } = message;
+    const messageClassNames = classNames(
+      'directMessage',
+      { 'directMessage--tweet': tweets && tweets.length > 0 },
+      { 'directMessage--link': links && links.length > 0 }
+    );
 
     return (
       <div
         key={`directMessage-${message.id}`}
-        className={classNames('directMessage', { 'directMessage--tweet': tweets && tweets.length > 0 })}
+        className={messageClassNames}
       >
-        {tweets.map(function(tweet) {
-          return (<Tweet key={`tweet-${tweet.id}-${message.id}`} id={tweet.id} />);
+        {tweets && tweets.map(function(tweet) {
+          return (
+            <Tweet key={`tweet-${tweet.id}-${message.id}`} id={tweet.id} />
+          );
         })}
-        {urls.map(function(url) {
-          return (<a href={url.expanded} key={`url-${message.id}-${url.display}`} target="_blank">{url.display}</a>);
+        {links && links.map(function(link) {
+          return (
+            <Link key={`link-${message.id}-${link.display_url}`} {...link} />
+          );
         })}
         {text}
       </div>
@@ -76,7 +59,7 @@ var mapStateToProps = function(store) {
 
 Messages.preload = {
   type: actionTypes.FETCH_MESSAGES,
-  functionName: 'getDirectMessages'
+  functionName: 'directMessages'
 };
 
 export default connect(mapStateToProps)(Messages);

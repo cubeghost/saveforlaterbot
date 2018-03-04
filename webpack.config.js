@@ -17,6 +17,7 @@ const config = {
   resolve: {
     alias: {
       src: path.resolve(__dirname, 'src'),
+      server: path.resolve(__dirname, 'src/server'),
       components: path.resolve(__dirname, 'src/components'),
     }
   },
