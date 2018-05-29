@@ -12,12 +12,14 @@ const Link = ({
         <div className="opengraphPreview">
           <img src={image} />
           <h4>{title}</h4>
-          <p className="opengraphPreview-description">{description}</p>
+          <p className="opengraphPreview-description text-dark">{description}</p>
         </div>
       </a>
     );
   } else {
-    return (<a href={url} target="_blank">{display_url}</a>);
+    return (
+      <a href={url} target="_blank">{display_url}</a>
+    );
   }
 };
 

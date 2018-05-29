@@ -2,6 +2,7 @@ import autobind from 'class-autobind';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Col, Button } from 'reactstrap';
 
 import { actionCreators } from 'src/actions';
 
@@ -30,15 +31,22 @@ class User extends Component {
     const { user } = this.props;
 
     return (
-      <aside>
-        <p>
+      <Col xs="4">
+        <h4>
           connected as {user && user.screen_name}
+        </h4>
+        <p>
+          <Button onClick={this.props.dispatchClearCache}>clear cache</Button>&nbsp;
+          <Button color="secondary" outline tag="a" href="/disconnect">disconnect</Button>
         </p>
-        <button onClick={this.props.dispatchClearCache}>clear cache</button>
-        <a href="/disconnect">disconnect</a>
-        <p>debug:</p>
-        <p>accessToken: <span style={{ backgroundColor: 'black' }}>{user._accessToken}</span></p>
-      </aside>
+        <h6 className="mt-4">debug:</h6>
+        <p>
+          accessToken:&nbsp;
+          <span className="bg-secondary text-secondary" style={{ wordBreak: 'break-word' }}>
+            {user._accessToken}
+          </span>
+        </p>
+      </Col>
     );
   }
 };

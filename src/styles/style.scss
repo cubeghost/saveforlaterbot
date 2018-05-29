@@ -1,3 +1,5 @@
+@import '~bootstrap/scss/bootstrap';
+
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -9,6 +11,7 @@ body {
   padding: 8px 14px;
   margin: 4px 0;
   border-radius: 6px;
+  max-width: 500px;
 
   &--tweet {
     border: 0;
@@ -20,17 +23,6 @@ body {
   }
 }
 
-.appRoot > .content {
-  display: flex;
-  flex-direction: row;
-}
-
-.directMessages {
-  flex: 1 1 70%;
-  max-width: 70%;
-  padding: 1em;
-}
-
 .opengraphPreview {
   img {
     max-width: 100%;
@@ -40,5 +32,9 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  p:last-of-type {
+    margin-bottom: 0;
   }
 }

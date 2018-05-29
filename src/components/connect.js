@@ -1,9 +1,14 @@
 import React from 'react';
+import { Col, Button } from 'reactstrap';
 
 const Connect = () => {
-  return (<div>
-    <a href="/connect/twitter" className="button">Connect to Twitter</a>
-  </div>);
+  return (
+    <Col>
+      <Button size="lg" color="primary" tag="a" href="/connect/twitter">
+        Connect to Twitter
+      </Button>
+    </Col>
+  );
 };
 
 export default Connect;

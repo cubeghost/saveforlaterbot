@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { Col } from 'reactstrap';
 
 import Tweet from 'components/tweet';
 import Link from 'components/link';
@@ -44,9 +45,11 @@ class Messages extends Component {
   }
 
   render() {
-    return (<div className="directMessages">
-      {this.props.messages.map(this.renderMessage)}
-    </div>);
+    return (
+      <Col className="directMessages">
+        {this.props.messages.map(this.renderMessage)}
+      </Col>
+    );
   }
 
 };
